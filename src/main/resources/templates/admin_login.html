@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{base :: layout( ~{::title}, ~{::section})}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login</title>
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <div class="card mt-3">
+              <div class="card-heading">
+                <p
+                  th:if="${succ}"
+                  th:text="${succ}"
+                  class="alert alert-success"
+                ></p>
+                <!-- Display error message -->
+                <p
+                  th:if="${err}"
+                  th:text="${err}"
+                  class="alert alert-danger"
+                ></p>
+              </div>
+              <div class="card-body">
+                <form
+                  th:action="@{/submit_admin_login}"
+                  th:object="${admin}"
+                  method="post"
+                >
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label"
+                      >Email</label
+                    >
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                      name="email"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label"
+                      >Password</label
+                    >
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="exampleInputPassword1"
+                      name="password"
+                    />
+                  </div>
+
+                  <button type="submit" class="btn btn-primary col-md-12">
+                    LOGIN
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
