@@ -30,7 +30,7 @@
               </div>
               <div class="card-body">
                 <form
-                  th:action="@{/submit_user_login}"
+                  th:action="@{/submit_user}"
                   th:object="${user}"
                   method="post"
                 >
@@ -59,7 +59,7 @@
                   </div>
                   <p>
                     Don't have an Account
-                    <a th:href="@{/user}">Register here</a>
+                    <a th:href="@{/userRgister}">Register here</a>
                   </p>
                   <button type="submit" class="btn btn-primary col-md-12">
                     LOGIN

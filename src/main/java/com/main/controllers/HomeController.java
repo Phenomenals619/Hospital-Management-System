@@ -31,11 +31,11 @@ public class HomeController {
     return "index";
   }
 
-  @GetMapping("/user")
+  @GetMapping("/userRegister")
   public String openUserPage(@ModelAttribute("user") Users user, Model model) {
     model.addAttribute("user", user);
 
-    return "user_register";
+    return "register_user";
   }
 
   @PostMapping("/submit_user")
@@ -54,11 +54,11 @@ public class HomeController {
       model.addAttribute("err", "An error occurred during registration.");
     }
 
-    return "redirect:/user";
+    return "redirect:/userRegister";
   }
 
-  @GetMapping("/login_user")
-  public String loginUser() {
+  @GetMapping("/loginUser")
+  public String signUpUser() {
     return "login_user";
   }
 
@@ -89,6 +89,12 @@ public class HomeController {
   public String logout(HttpSession session) {
     session.invalidate(); // Clear the session
     return "redirect:/"; // Redirect to the login page
+  }
+
+  @GetMapping("/login_user")
+  public String loginUser(@ModelAttribute("user") Users user, Model model) {
+
+    return "login_user";
   }
 
 }
