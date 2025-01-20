@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<html
-  lang="en"
-  xmlns:th="http://www.thymeleaf.org"
->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
@@ -25,8 +22,6 @@
     <title>User Dash</title>
   </head>
   <body>
-
-
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-success">
       <div class="container-fluid">
@@ -58,49 +53,49 @@
               type="submit"
             ></button>
           </form>
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-           
-          <!--Admin dropdown-->
-          <div class="dropdown me-2">
+
+          <div class="dropdown ms-3">
             <button
-              class="btn btn-secondary dropdown-toggle"
+              class="btn btn-danger dropdown-toggle"
               type="button"
-              id="dropdownMenuButton1"
+              id="dropdownMenuButton2"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-             <span data-th-text="${userName}"></span>
+              APPOINTMENT
             </button>
             <ul
-              class="dropdown-menu "
-              style="width: 2px"
-              aria-labelledby="dropdownMenuButton1"
+              class="dropdown-menu dropdown-menu-dark"
+              aria-labelledby="dropdownMenuButton2"
             >
               <li>
-                <a class="dropdown-item" href="#">Profile</a>
+                <a class="dropdown-item active" href="#">Take Appointment</a>
               </li>
+              <li><a class="dropdown-item" href="#">View Appointment</a></li>
+            </ul>
+          </div>
+
+          <div class="btn-group ms-auto">
+            <button
+              class="btn btn-info btn-md dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="fa-regular fa-user me-1"></i>
+              <span data-th-text="${userName}"></span>
+            </button>
+
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
               <li>
                 <a class="dropdown-item" th:href="@{/logout}">Logout</a>
               </li>
-            
             </ul>
-           
           </div>
-         
-          </ul>
         </div>
       </div>
     </nav>
-
-
-     
-      
-    </div>
-  
-
-    </div>
-
-    
 
     <!-- Optional JavaScript; choose one of the two! -->
 
