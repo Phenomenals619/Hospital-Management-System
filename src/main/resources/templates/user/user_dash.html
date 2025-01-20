@@ -2,13 +2,11 @@
 <html
   lang="en"
   xmlns:th="http://www.thymeleaf.org"
-  th:fragment="layout(title,content)"
 >
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="../static/css/style.css" />
 
     <!-- Bootstrap CSS -->
     <link
@@ -24,9 +22,11 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <title th:replace="${title}"></title>
+    <title>User Dash</title>
   </head>
   <body>
+
+
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-success">
       <div class="container-fluid">
@@ -59,87 +59,48 @@
             ></button>
           </form>
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item" th:if="${session.role != 'admin'}">
-              <a
-                class="nav-link active text-white"
-                aria-current="page"
-                th:href="@{/admin}"
-                >ADMIN</a
-              >
-            </li>
-            <li class="nav-item" th:if="${session.role != 'admin'}">
-              <a
-                class="nav-link active text-white"
-                aria-current="page"
-                th:href="@{/doctor}"
-                >DOCTOR</a
-              >
-            </li>
-            <li class="nav-item" th:if="${session.role != 'admin'}">
-              <a class="nav-link active text-white" th:href="@{/userRegister}"
-                >USER</a
-              >
-            </li>
-
-            <div class="dropdown me-2" th:if="${session.role == 'admin'}">
-              <button
-                class="btn btn-warning dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                DOCTOR
-              </button>
-              <ul
-                class="dropdown-menu"
-                style="width: 2px"
-                aria-labelledby="dropdownMenuButton1"
-              >
-                <li>
-                  <a class="dropdown-item" th:href="@{/addDoctor}"
-                    >Add Doctor</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" th:href="@{/viewDoctor}"
-                    >View Doctor</a
-                  >
-                </li>
-              </ul>
-            </div>
-            <!--Admin dropdown-->
-            <div class="dropdown me-2" th:if="${session.role == 'admin'}">
-              <button
-                class="btn btn-secondary dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                ADMIN
-              </button>
-              <ul
-                class="dropdown-menu"
-                style="width: 2px"
-                aria-labelledby="dropdownMenuButton1"
-              >
-                <li>
-                  <a class="dropdown-item" href="#">Profile</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" th:href="@{/logout}">Logout</a>
-                </li>
-              </ul>
-            </div>
+           
+          <!--Admin dropdown-->
+          <div class="dropdown me-2">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+             <span data-th-text="${userName}"></span>
+            </button>
+            <ul
+              class="dropdown-menu "
+              style="width: 2px"
+              aria-labelledby="dropdownMenuButton1"
+            >
+              <li>
+                <a class="dropdown-item" href="#">Profile</a>
+              </li>
+              <li>
+                <a class="dropdown-item" th:href="@{/logout}">Logout</a>
+              </li>
+            
+            </ul>
+           
+          </div>
+         
           </ul>
         </div>
       </div>
     </nav>
 
-    <div th:if="${session.role == 'admin' }"></div>
-    <!--Dynamic content-->
-    <div th:replace="${content}"></div>
+
+     
+      
+    </div>
+  
+
+    </div>
+
+    
 
     <!-- Optional JavaScript; choose one of the two! -->
 

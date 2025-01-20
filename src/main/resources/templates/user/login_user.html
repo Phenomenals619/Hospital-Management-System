@@ -31,7 +31,7 @@
               <div class="card-body">
                 <form
                   th:action="@{/submit_login_user}"
-                  th:object="${user}"
+                  th:object="${userlog}"
                   method="post"
                 >
                   <div class="mb-3">
@@ -44,6 +44,7 @@
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
                       name="email"
+                      data-th-field="*{email}"
                     />
                   </div>
                   <div class="mb-3">

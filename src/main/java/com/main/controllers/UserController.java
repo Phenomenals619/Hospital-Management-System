@@ -18,8 +18,8 @@ public class UserController {
     UserRepo userRepo;
 
     @GetMapping("/userRegister")
-    public String openUserPage(@ModelAttribute("user") Users user, Model model) {
-        model.addAttribute("user", user);
+    public String openUserPage( Model model) {
+        model.addAttribute("user", new Users());
 
         return "user/register_user";
     }
@@ -44,15 +44,23 @@ public class UserController {
     }
 
     @GetMapping("/loginUser")
-    public String signUpUser() {
+    public String signUpUser(Model model) {
+        model.addAttribute("userlog", new Users());
         return "user/login_user";
     }
 
     @PostMapping("/submit_login_user")
-    public String submitLoginUser(@RequestBody String entity) {
+    public String submitLoginUser(@ModelAttribute Users users,Model model) {
+        Users logUser=userRepo.findByEmail(users.getEmail());
+        if(logUser !=null && logUser.getPassword().equals(users.getPassword())){
+            System.out.println(logUser.getName());
+            
+            model.addAttribute("userName", logUser.getName());
+            return "user/user_dash";
+        }else{
+            return "redirect:/loginUser";
+        }
         
-
-        return "redirect:/";
     }
 
 }
