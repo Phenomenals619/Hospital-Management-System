@@ -8,6 +8,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../static/css/style.css">
 
     <!-- Bootstrap CSS -->
     <link
@@ -26,6 +27,8 @@
     <title th:replace="${title}"></title>
   </head>
   <body>
+
+
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-success">
       <div class="container-fluid">
@@ -78,6 +81,31 @@
               <a class="nav-link active text-white" th:href="@{/userRegister}">USER</a>
             </li>
 
+
+            <div class="dropdown me-2" th:if="${session.role == 'admin'}">
+              <button
+                class="btn btn-warning dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                DOCTOR
+              </button>
+              <ul
+                class="dropdown-menu"
+                style="width: 2px"
+                aria-labelledby="dropdownMenuButton1"
+              >
+                <li>
+                <a class="dropdown-item" th:href="@{/addDoctor}">Add Doctor</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" th:href="@{/viewDoctor}">View Doctor</a>
+                </li>
+              </ul>
+            </div>
+
             <div class="dropdown me-2" th:if="${session.role == 'admin'}">
               <button
                 class="btn btn-secondary dropdown-toggle"
@@ -89,7 +117,7 @@
                 ADMIN
               </button>
               <ul
-                class="dropdown-menu"
+                class="dropdown-menu "
                 style="width: 2px"
                 aria-labelledby="dropdownMenuButton1"
               >
@@ -99,13 +127,27 @@
                 <li>
                   <a class="dropdown-item" th:href="@{/logout}">Logout</a>
                 </li>
+              
               </ul>
+             
             </div>
+         
+
           </ul>
         </div>
       </div>
     </nav>
-    <div th:replace="${content}"></div>
+
+    <div th:if="${session.role == 'admin' }">
+     
+      
+    </div>
+    <!--Dynamic content-->
+    <div th:replace="${content}">
+
+    </div>
+
+    
 
     <!-- Optional JavaScript; choose one of the two! -->
 

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{base :: layout(~{::title}, ~{::section})}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Register</title>
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <div class="card mt-3">
+              <div class="card-heading">
+                <!-- Success Message -->
+                <p
+                  th:if="${succ}"
+                  th:text="${succ}"
+                  class="alert alert-success"
+                ></p>
+                <!-- Error Message -->
+                <p
+                  th:if="${err}"
+                  th:text="${err}"
+                  class="alert alert-danger"
+                ></p>
+              </div>
+              <div class="card-body">
+                <form
+                  th:action="@{/submit_register_doctor}"
+                  th:object="${doctor}"
+                  method="post"
+                >
+                  <!-- Name Field -->
+                  <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="name"
+                      th:field="*{name}"
+                      placeholder="Enter your name"
+                    />
+                  </div>
+
+                  <!-- Email Field -->
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      th:field="*{email}"
+                      placeholder="Enter your email"
+                    />
+                  </div>
+
+                  <!-- Specialization Field -->
+                  <div class="mb-3">
+                    <label for="specialization" class="form-label">Specialization</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="specialization"
+                      th:field="*{specialization}"
+                      placeholder="Enter your specialization"
+                    />
+                  </div>
+
+                  <!-- Password Field -->
+                  <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="password"
+                      th:field="*{password}"
+                      placeholder="Enter your password"
+                    />
+                  </div>
+
+                  <!-- Submit Button -->
+                  <button type="submit" class="btn btn-primary col-md-12">
+                    Submit
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

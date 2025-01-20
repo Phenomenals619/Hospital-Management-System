@@ -7,7 +7,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Register</title>
+    <title>Doctor Login</title>
   </head>
   <body>
     <section>
@@ -30,23 +30,10 @@
               </div>
               <div class="card-body">
                 <form
-                  th:action="@{/submit_user}"
-                  th:object="${user}"
+                  th:action="@{/submit_login_doctor}"
+                  th:object="${doctor}"
                   method="post"
                 >
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label"
-                      >Name</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                      name="name"
-                    />
-                  </div>
-
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label"
                       >Email</label
@@ -56,7 +43,7 @@
                       class="form-control"
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
-                      name="email"
+                      name="email" 
                     />
                   </div>
                   <div class="mb-3">
@@ -70,12 +57,8 @@
                       name="password"
                     />
                   </div>
-                  <p>
-                    Already have an Account
-                    <a th:href="@{/loginUser}">Login here</a>
-                  </p>
                   <button type="submit" class="btn btn-primary col-md-12">
-                    Submit
+                    LOGIN
                   </button>
                 </form>
               </div>
