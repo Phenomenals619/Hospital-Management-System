@@ -15,18 +15,12 @@
         <div class="row">
           <div class="col-md-6 offset-md-3">
             <div class="card mt-3">
-              <div class="card-heading">
-                <p
-                  th:if="${succ}"
-                  th:text="${succ}"
-                  class="alert alert-success"
-                ></p>
-                <!-- Display error message -->
-                <p
-                  th:if="${err}"
-                  th:text="${err}"
-                  class="alert alert-danger"
-                ></p>
+              <div class="card-header text-center">
+                <p class="fs-4">Register Here</p>
+                <th:block data-th-if="${session.msg}">
+                  <p class="text-center text-success fs-4">[[${session.msg}]]</p>
+                  <th:block th:text="${@sessionHelper.removeSessionMessage()}"></th:block>
+                </th:block>
               </div>
               <div class="card-body">
                 <form

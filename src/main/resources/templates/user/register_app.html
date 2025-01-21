@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register Appointment</title>
+  </head>
+  <body>
+    <!-- Include Navbar -->
+    <div th:replace="~{navbar :: navbar}"></div>
+
+    <!-- Main content -->
+    <section>
+      <h1>Register Appointment</h1>
+      <form action="/submit_register_appointment" method="POST">
+        <label for="userName">Name:</label>
+        <input type="text" id="userName" name="userName" />
+        <label for="userDate">Appointment Date:</label>
+        <input type="date" id="userDate" name="userDate" />
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+  </body>
+</html>

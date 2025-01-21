@@ -6,10 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.main.entities.Users;
 import com.main.repository.UserRepo;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
@@ -18,21 +19,23 @@ public class UserController {
     UserRepo userRepo;
 
     @GetMapping("/userRegister")
-    public String openUserPage( Model model) {
+    public String openUserPage(Model model) {
         model.addAttribute("user", new Users());
 
         return "user/register_user";
     }
 
     @PostMapping("/submit_register_user")
-    public String submitUser(@ModelAttribute Users user, Model model) {
+    public String submitUser(@ModelAttribute Users user, Model model, HttpSession session) {
         try {
 
             Users users = userRepo.save(user);
             if (users != null) {
-                model.addAttribute("succ", "User Register Successfully");
+                System.out.println(users.getName());
+                session.setAttribute("msg", "Register sucessfully");
+                // model.addAttribute("succ", "User Register Successfully");
             } else {
-                model.addAttribute("err", "User Register Failed");
+                session.setAttribute("msg", "something wrong on server");
             }
 
         } catch (Exception e) {
@@ -50,17 +53,18 @@ public class UserController {
     }
 
     @PostMapping("/submit_login_user")
-    public String submitLoginUser(@ModelAttribute Users users,Model model) {
-        Users logUser=userRepo.findByEmail(users.getEmail());
-        if(logUser !=null && logUser.getPassword().equals(users.getPassword())){
+    public String submitLoginUser(@ModelAttribute Users users, Model model, HttpSession session) {
+        Users logUser = userRepo.findByEmail(users.getEmail());
+        if (logUser != null && logUser.getPassword().equals(users.getPassword())) {
             System.out.println(logUser.getName());
-            
+
             model.addAttribute("userName", logUser.getName());
             return "user/user_dash";
-        }else{
+        } else {
+            session.setAttribute("msg", "Invalid Email or Password");
             return "redirect:/loginUser";
         }
-        
+
     }
 
 }
