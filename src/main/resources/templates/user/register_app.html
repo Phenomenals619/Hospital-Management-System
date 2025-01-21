@@ -3,21 +3,171 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <!-- Bootstrap CSS -->
+     <link
+     href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+     rel="stylesheet"
+     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+     crossorigin="anonymous"
+   />
+   <link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+     crossorigin="anonymous"
+     referrerpolicy="no-referrer"
+   />
     <title>Register Appointment</title>
   </head>
   <body>
 
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-success">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+          <i class="fa-regular fa-hospital"></i> HMS
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <!-- Main content -->
-    <section>
-      <h1>Register Appointment</h1>
-      <form action="/submit_register_appointment" method="POST">
-        <label for="userName">Name:</label>
-        <input type="text" id="userName" name="userName" />
-        <label for="userDate">Appointment Date:</label>
-        <input type="date" id="userDate" name="userDate" />
-        <button type="submit">Submit</button>
-      </form>
-    </section>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <form class="d-flex col-sm-2 w-75">
+            <input
+              class="form-control ms-3"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button
+              class="btn btn-dark fa-solid fa-magnifying-glass"
+              type="submit"
+            ></button>
+          </form>
+
+          <div class="dropdown ms-3">
+            <button
+              class="btn btn-danger dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton2"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              APPOINTMENT
+            </button>
+            <ul
+              class="dropdown-menu dropdown-menu-dark"
+              aria-labelledby="dropdownMenuButton2"
+            >
+              <li>
+                <a class="dropdown-item active" th:href="@{/takeApp}">Take Appointment</a>
+              </li>
+              <li><a class="dropdown-item" th:href="@{/viewApp}">View Appointment</a></li>
+            </ul>
+          </div>
+
+          <div class="btn-group ms-auto">
+            <button
+              class="btn btn-info btn-md dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="fa-regular fa-user me-1"></i>
+              <span th:text="${userName}"></span>
+            </button>
+
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li>
+                <a class="dropdown-item" th:href="@{/logout}">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div class="card mt-3">
+            <div class="card-header text-center">
+              <h1>Register Appointment</h1>
+            </div>
+            <div  class="card-body"> 
+              <form
+              th:action="@{/submit_app}"
+              th:object="${app}"
+              method="post"
+            >
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"
+                  >Patient Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  name="name"
+                  th:field="*{name}"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"
+                  >Disease</label >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  name="disease"
+                  th:field="*{disease}"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label"
+                  >Date</label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  id="exampleInputPassword1"
+                  name="password"
+                  th:field="*{date}"
+                />
+              </div>
+
+              <input type="hidden" name="users.id" value="${currentUser.id}" />
+              
+
+              <button type="submit" class="btn btn-primary col-md-12">
+                REGISTER
+              </button>
+            </form>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
   </body>
 </html>

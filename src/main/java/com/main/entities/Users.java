@@ -26,5 +26,5 @@ public class Users {
     private String password;
 
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
-    private List  <Appointment> appointment;
+    private List<Appointment> appointment;
 }

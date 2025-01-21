@@ -58,6 +58,10 @@ public class UserController {
         if (logUser != null && logUser.getPassword().equals(users.getPassword())) {
             System.out.println(logUser.getName());
 
+            // Assuming you're using a method like this to get the current user
+            Users currentUser = (Users) session.getAttribute("currentUser");
+            model.addAttribute("currentUser", currentUser); // Make currentUser available in the model
+
             model.addAttribute("userName", logUser.getName());
             return "user/user_dash";
         } else {
