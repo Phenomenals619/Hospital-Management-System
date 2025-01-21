@@ -1,13 +1,11 @@
 package com.main.entities;
 
-import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,15 +14,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Users {
-
+public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String name;
-    private String email;
-    private String password;
-
-    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
-    private List  <Appointment> appointment;
+    private String status;
+    private String date;
+    @ManyToOne
+    private Users users;
+    @ManyToOne
+    private Doctor doctor;
 }
