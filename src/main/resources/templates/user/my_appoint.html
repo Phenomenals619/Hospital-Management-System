@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::body})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container p-2">
+		<div class="row">
+			<div class="col-md-10 offset-md-1">
+				<div class="card paint-card">
+					<div class="card-header fw-bold text-center">Your Appointment
+					</div>
+					<div class="card-body">
+
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">SL No</th>
+									<th scope="col">Patient Name</th>
+									<th scope="col">Doctor Name</th>
+									<th scope="col">Date</th>
+									<th scope="col">Time</th>
+									<th scope="col">Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="a,num:${apntLi}">
+									<th scope="row">[[${num.count}]]</th>
+									<td>[[${a.patientName}]]</td>
+									<td>[[${a.doctor.fullName}]]</td>
+									<td>[[${a.schedule.date}]]</td>
+									<td>[[${a.schedule.fromTime}]] - [[${a.schedule.toTime}]]</td>
+									<td>[[${a.status}]]</td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

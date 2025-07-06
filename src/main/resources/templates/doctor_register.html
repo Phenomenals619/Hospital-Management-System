@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::body})">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Registration | Hospital Management System</title>
+  </head>
+  <body>
+    <section class="registration-section">
+      <div class="container py-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-6 col-md-8 col-sm-12">
+            <div class="card border-0 shadow-lg registration-card">
+              <div class="card-header text-center border-0 p-4 gradient-header">
+                <h4 class="mb-0 text-white">Doctor Registration</h4>
+              </div>
+
+              <!-- Alerts section -->
+              <div class="alert-section px-4 pt-3">
+                <th:block th:if="${session.succMsg}" class="text-center">
+                  <div
+                    class="alert alert-success alert-dismissible fade show"
+                    role="alert"
+                  >
+                    <p class="mb-0 fw-bold" th:text="${session.succMsg}"></p>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="alert"
+                      aria-label="Close"
+                    ></button>
+                    <th:block
+                      th:text="${#session.removeAttribute('succMsg')}"
+                    ></th:block>
+                  </div>
+                </th:block>
+
+                <th:block th:if="${session.errorMsg}" class="text-center">
+                  <div
+                    class="alert alert-danger alert-dismissible fade show"
+                    role="alert"
+                  >
+                    <p class="mb-0 fw-bold" th:text="${session.errorMsg}"></p>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="alert"
+                      aria-label="Close"
+                    ></button>
+                    <th:block
+                      th:text="${#session.removeAttribute('errorMsg')}"
+                    ></th:block>
+                  </div>
+                </th:block>
+              </div>
+
+              <div class="card-body p-4">
+                <form
+                  action="registerDoct"
+                  method="post"
+                  id="userRegister"
+                  novalidate
+                  enctype="multipart/form-data"
+                >
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="fullName"
+                      name="fullName"
+                      placeholder="Full Name"
+                      required
+                    />
+                    <label for="fullName">Full Name</label>
+                  </div>
+
+                  <div class="form-floating mb-3">
+                    <input
+                      type="tel"
+                      class="form-control"
+                      id="mobNo"
+                      name="mobNo"
+                      placeholder="Mobile Number"
+                      required
+                    />
+                    <label for="mobNo">Mobile Number</label>
+                  </div>
+
+                  <div class="form-floating mb-3">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      name="email"
+                      placeholder="Email"
+                      required
+                    />
+                    <label for="email">Email</label>
+                  </div>
+
+                  <div class="form-floating mb-3">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="password"
+                      name="password"
+                      placeholder="Password"
+                      required
+                    />
+                    <label for="password">Password</label>
+                  </div>
+
+                  <input type="hidden" name="role" value="ROLE_DOCTOR" />
+                  <input type="hidden" name="enable" value="false" />
+
+                  <div class="mb-3">
+                    <label for="certificate" class="form-label fw-semibold"
+                      >Upload Certificate</label
+                    >
+                    <input
+                      type="file"
+                      name="file"
+                      id="certificate"
+                      class="form-control"
+                      required
+                    />
+                    <div class="form-text">
+                      Please upload your medical license or qualification
+                      certificate
+                    </div>
+                  </div>
+
+                  <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                      Register
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <div class="card-footer text-center border-0 p-3 bg-light">
+                <p class="mb-0">
+                  Are you a Patient?
+                  <a href="register" class="text-decoration-none fw-bold"
+                    >Click here</a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        /* Custom styles */
+        .registration-section {
+          background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+            url("img/hos5.png");
+          background-size: cover;
+          background-position: center;
+          background-attachment: fixed;
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .registration-card {
+          border-radius: 15px;
+          overflow: hidden;
+          transition: all 0.3s ease;
+          background-color: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
+        }
+
+        .gradient-header {
+          background: linear-gradient(135deg, #0072ff, #00c6ff);
+        }
+
+        .form-control {
+          border-radius: 8px;
+        }
+
+        .form-control:focus {
+          border-color: #0072ff;
+          box-shadow: 0 0 0 0.25rem rgba(0, 114, 255, 0.25);
+        }
+
+        .btn-primary {
+          background: linear-gradient(135deg, #0072ff, #00c6ff);
+          border: none;
+          transition: all 0.3s ease;
+          border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+          background: linear-gradient(135deg, #005bb5, #00a3d9);
+          transform: translateY(-2px);
+          box-shadow: 0 5px 15px rgba(0, 114, 255, 0.4);
+        }
+
+        .btn-primary:active {
+          transform: translateY(0);
+        }
+
+        .alert {
+          border-radius: 10px;
+          border-left: 4px solid;
+        }
+
+        .alert-success {
+          border-left-color: #28a745;
+        }
+
+        .alert-danger {
+          border-left-color: #dc3545;
+        }
+
+        .card-footer {
+          border-bottom-left-radius: 15px;
+          border-bottom-right-radius: 15px;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+          .container {
+            padding: 10px;
+          }
+
+          .registration-card {
+            margin: 0 15px;
+          }
+        }
+      </style>
+    </section>
+  </body>
+</html>

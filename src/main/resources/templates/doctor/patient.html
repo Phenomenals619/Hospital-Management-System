@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::body})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container p-2">
+		<div class="row">
+			<div class="col-md-10 offset-md-1">
+				<div class="card paint-card">
+					<div class="card-header fw-bold text-center">Patient
+						Appointment
+						<th:block th:if="${session.succMsg}" class="text-center">
+								<p class="text-success fw-bold" th:text="${session.succMsg}"></p>
+								<th:block th:text="${#session.removeAttribute('succMsg')}"></th:block>
+							</th:block>
+						</div>
+					<div class="card-body">
+
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">SL No</th>
+									<th scope="col">Patient Name</th>
+									<th scope="col">Date</th>
+									<th scope="col">Time</th>
+									<th scope="col">Status</th>
+									<th scope="col">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="a,num:${patient}">
+									<th scope="row">[[${num.count}]]</th>
+									<td>[[${a.patientName}]]</td>
+									<td>[[${a.schedule.date}]]</td>
+									<td>[[${a.schedule.fromTime}]] - [[${a.schedule.toTime}]]</td>
+									<td>[[${a.status}]]</td>
+									<td>
+									
+									<th:block th:if="${a.status=='Not Completed'}">
+											<a th:href="@{'/doctor/statusUpdate/'+${a.id}}" class="btn btn-primary btn-sm">Complete</a>
+									</th:block>
+									
+									<th:block th:if="${a.status=='Completed'}">
+											<a class="btn btn-success btn-sm disabled">Complete</a>
+									</th:block>
+										
+										
+										</td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

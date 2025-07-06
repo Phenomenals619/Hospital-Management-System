@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(content)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MediHome - Healthcare appointment booking system">
+    <meta property="og:title" content="MediHome - Healthcare Services">
+    <meta property="og:description" content="Book healthcare appointments with ease using MediHome.">
+    <meta property="og:image" content="/images/medihome-og-image.jpg">
+    <title>HMS</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    
+    <style>
+        /* Base Variables */
+        :root {
+            --primary-color: #0d6efd;
+            --primary-dark: #0b5ed7;
+            --primary-light: #e8f0ff;
+            --secondary-color: #20c997;
+            --secondary-dark: #1ba87e;
+            --accent-color: #fd7e14;
+            --light-bg: #f8f9fa;
+            --dark-bg: #212529;
+            --text-color: #212529;
+            --text-muted: #6c757d;
+            --text-light: #f8f9fa;
+            --border-radius: 0.75rem;
+            --border-radius-sm: 0.5rem;
+            --box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.08);
+            --box-shadow-hover: 0 0.75rem 2rem rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s ease;
+            --nav-height: 70px;
+        }
+
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            background-color: #f5f7fa;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .btn {
+            border-radius: var(--border-radius-sm);
+            padding: 0.6rem 1.5rem;
+            font-weight: 500;
+            transition: var(--transition);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(13, 110, 253, 0.25);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary-dark);
+            border-color: var(--secondary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(32, 201, 151, 0.25);
+        }
+
+        .btn-outline-primary {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .card {
+            border: none;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
+            padding: 0;
+            height: var(--nav-height);
+            z-index: 1030;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            font-size: 1.5rem;
+            padding: 0;
+            gap: 8px;
+        }
+
+        .navbar-brand i {
+            color: var(--primary-color);
+            font-size: 1.75rem;
+            filter: drop-shadow(0 2px 4px rgba(13, 110, 253, 0.3));
+        }
+
+        .nav-item {
+            position: relative;
+            margin: 0 0.3rem;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-color) !important;
+            padding: 1.5rem 1rem !important;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-link i {
+            color: var(--primary-color);
+            margin-right: 6px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 3px 3px 0 0;
+        }
+
+        /* Search Form Styling */
+        .doctor-search-form .input-group {
+            border-radius: var(--border-radius);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .doctor-search-form .input-group:focus-within {
+            box-shadow: 0 5px 15px rgba(13, 110, 253, 0.15);
+        }
+
+        .doctor-search-form .form-control {
+            border: 1px solid #e0e0e0;
+            padding: 0.75rem 1rem;
+            font-size: 0.95rem;
+            border-right: none;
+        }
+
+        .doctor-search-form .form-control:focus {
+            box-shadow: none;
+            border-color: var(--primary-color);
+        }
+
+        .doctor-search-form .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.25rem;
+        }
+
+        .doctor-search-form .btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Dropdown Menu Styling */
+        .dropdown-menu {
+            border-radius: var(--border-radius-sm);
+            box-shadow: var(--box-shadow);
+            border: none;
+            padding: 0.75rem 0;
+            margin-top: 0.5rem;
+            border-top: 3px solid var(--primary-color);
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-item {
+            padding: 0.625rem 1.25rem;
+            font-weight: 500;
+            transition: var(--transition);
+            color: var(--text-color);
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .dropdown-item i {
+            width: 20px;
+            text-align: center;
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+
+        /* User Menu Button */
+        .user-menu .btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary-light);
+            border: 1px solid rgba(13, 110, 253, 0.1);
+            color: var(--primary-color);
+            font-weight: 500;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--border-radius-sm);
+        }
+
+        .user-menu .btn:hover {
+            background-color: var(--primary-light);
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(13, 110, 253, 0.15);
+        }
+
+        .user-menu .btn i {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        /* Information Dropdown */
+        .info-dropdown .nav-link {
+            color: var(--text-color) !important;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .info-dropdown .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .info-dropdown .nav-link i {
+            color: var(--primary-color);
+        }
+
+        /* Main Content Area */
+        #main-content {
+            min-height: calc(100vh - var(--nav-height) - 300px);
+            padding: 3rem 0;
+        }
+
+        /* Footer Styling */
+        .footer {
+            background-color: var(--dark-bg);
+            color: white;
+            padding: 4rem 0 2rem;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .footer h5 {
+            position: relative;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .footer h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .footer a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+            color: white;
+        }
+
+        /* Skip Link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary-color);
+            color: white;
+            padding: 8px;
+            z-index: 100;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Enhanced Responsive Adjustments */
+        @media (max-width: 1199.98px) {
+            .nav-item {
+                margin: 0 0.1rem;
+            }
+            
+            .nav-link {
+                padding: 1.5rem 0.8rem !important;
+            }
+        }
+        
+        @media (max-width: 991.98px) {
+            .navbar {
+                height: auto;
+                padding: 0.75rem 0;
+            }
+            
+            .nav-link {
+                padding: 0.75rem 1rem !important;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            }
+            
+            .nav-link.active::after {
+                display: none;
+            }
+            
+            .nav-link.active {
+                background-color: var(--primary-light);
+                border-radius: var(--border-radius-sm);
+            }
+            
+            .navbar-collapse {
+                background-color: white;
+                padding: 1rem;
+                border-radius: var(--border-radius);
+                box-shadow: var(--box-shadow);
+                margin-top: 0.5rem;
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+            
+            .doctor-search-form {
+                margin: 1rem 0;
+                width: 100%;
+            }
+            
+            .dropdown-menu {
+                border: none;
+                box-shadow: none;
+                padding-left: 2rem;
+                animation: none;
+            }
+            
+            .user-menu {
+                width: 100%;
+                margin-top: 1rem;
+            }
+            
+            .user-menu .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 767.98px) {
+            .footer {
+                text-align: center;
+            }
+            
+            .footer h5::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .footer a:hover {
+                transform: translateX(0) translateY(-3px);
+            }
+        }
+        
+        @media (max-width: 575.98px) {
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+            
+            .navbar-brand i {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to Content Link -->
+    <a href="#main-content" class="skip-link visually-hidden">Skip to main content</a>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+            <div class="container">
+                <!-- Logo -->
+                <a class="navbar-brand" href="/" aria-label="MediHome Homepage">
+                    <i class="fa-solid fa-house-chimney-medical"></i>
+                    <span>HMS</span>
+                </a>
+                
+                <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <!-- Doctor Search Form -->
+                    <form class="doctor-search-form mx-lg-3 my-2 my-lg-0" action="/findDoctor" method="GET" role="search">
+                        <div class="input-group">
+                            <input class="form-control" type="search" placeholder="Find a doctor or specialty..." 
+                                aria-label="Search for doctors" name="query">
+                            <button class="btn" type="submit" aria-label="Search">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- Admin Navigation -->
+                        <th:block th:if="${user!=null && user.role=='ROLE_ADMIN'}">
+                            <li class="nav-item">
+                                <a class="nav-link" th:classappend="${#httpServletRequest.requestURI == '/' ? 'active' : ''}" href="/">
+                                    <i class="fa-solid fa-gauge-high"></i> Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:classappend="${#httpServletRequest.requestURI == '/admin/doctorList' ? 'active' : ''}" href="/admin/doctorList">
+                                    <i class="fa-solid fa-user-doctor"></i> Doctors
+                                </a>
+                            </li>
+                            <!-- <li class="nav-item">
+                                <a class="nav-link" th:classappend="${#httpServletRequest.requestURI == '/admin/patients' ? 'active' : ''}" href="/admin/patients">
+                                    <i class="fa-solid fa-hospital-user"></i> Patients
+                                </a>
+                            </li> -->
+                        </th:block>
+
+                        <!-- Doctor Navigation -->
+                        <th:block th:if="${user!=null && user.role=='ROLE_DOCTOR'}">
+                           
+                            <li class="nav-item">
+                                <a class="nav-link" th:classappend="${#httpServletRequest.requestURI == '/doctor/addAppoint' ? 'active' : ''}" 
+                                href="/doctor/addAppoint">
+                                    <i class="fa-solid fa-calendar-days"></i> Schedule
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:classappend="${#httpServletRequest.requestURI == '/doctor/patient' ? 'active' : ''}"  href="/doctor/patient">
+                                    <i class="fa-solid fa-hospital-user"></i> Patients
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:classappend="${#httpServletRequest.requestURI == '/doctor/payment' ? 'active' : ''}" href="/doctor/payment">
+                                    <i class="fas fa-credit-card"></i> Payment
+                                </a>
+                            </li>
+                        </th:block>
+
+                        <!-- Patient Navigation -->
+                        <th:block th:if="${user!=null && user.role=='ROLE_USER'}">
+                            <!-- <li class="nav-item">
+                                <a class="nav-link" th:classappend="${#httpServletRequest.requestURI == '/user/getMyAppoint' ? 'active' : ''}" href="/user/getMyAppoint">
+                                    <i class="fa-solid fa-calendar-check"></i> Your Appointments
+                                </a>
+                            </li> -->
+                            <!-- <li class="nav-item">
+                                <a class="nav-link" th:classappend="${#httpServletRequest.requestURI == '/user/payment' ? 'active' : ''}" href="/user/payment">
+                                    <i class="fa-solid fa-calendar-check"></i> Your Appointments
+                                </a>
+                            </li> -->
+                        </th:block>
+                    </ul>
+                    
+                    <!-- Right Side Navigation Elements -->
+                    <div class="d-flex align-items-center">
+                        <!-- Guest Navigation -->
+                        <th:block th:if="${user==null}">
+                            <!-- Information dropdown for guests -->
+                            <div class="dropdown info-dropdown me-2">
+                                <a class="nav-link dropdown-toggle" href="#" id="infoDropdown" role="button" 
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-circle-info"></i> Information
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="infoDropdown">
+                                    <li>
+                                        <a class="dropdown-item" th:href="@{/services}">
+                                            <i class="fas fa-clipboard-list"></i> Our Services
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" th:href="@{/about}">
+                                            <i class="fas fa-circle-info"></i> About Us
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" th:href="@{/contact}">
+                                            <i class="fas fa-envelope"></i> Contact Us
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Login/Signup buttons for guests -->
+                            <div class="ms-2 d-flex gap-2">
+                                <a class="btn btn-outline-primary" href="/signin">
+                                    <i class="fas fa-sign-in-alt me-1"></i> Login
+                                </a>
+                                <a class="btn btn-primary" href="/register">
+                                    <i class="fas fa-user-plus me-1"></i> Signup
+                                </a>
+                            </div>
+                        </th:block>
+
+                        <!-- User dropdown menu for logged-in users -->
+                        <th:block th:if="${user!=null}">
+                            <div class="dropdown user-menu ms-2">
+                                <button class="btn dropdown-toggle" type="button"
+                                    id="userDropdown" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="fa-solid fa-circle-user"></i> 
+                                    <span class="d-none d-sm-inline">[[${user.fullName}]]</span>
+                                </button>
+                                
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                    <li th:if="${user.role=='ROLE_USER'}">
+                                        <a class="dropdown-item" href="/user/getMyAppoint">
+                                            <i class="fas fa-calendar-check"></i> Show Appointments
+                                        </a>
+                                        <!-- <a class="dropdown-item" href="/user/findDoctor">
+                                            <i class="fas fa-calendar-check"></i> Take Appointments
+                                        </a> -->
+                                        <form action="/findDoctor" method="get" class="dropdown-item"  th:style="'border:none'">
+                            
+                                            <button type="submit" th:style="'border:none'">
+                                                <i class="fas fa-calendar-check"></i> Take Appointments
+                                            </button>
+                                        </form>
+                                        
+                                    </li>
+                                  
+                                    <li th:if="${user.role=='ROLE_DOCTOR'}">
+                                        <a class="dropdown-item" href="/doctor/">
+                                            <i class="fas fa-cog"></i> Profile
+                                        </a>
+                                    </li>
+                                    <li th:if="${user.role=='ROLE_ADMIN'}">
+                                        <a class="dropdown-item" href="/admin/">
+                                            <i class="fas fa-cog"></i> Profile
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item text-danger" href="/logout">
+                                            <i class="fas fa-sign-out-alt"></i> Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <div class="container">
+            <div th:replace="${content}"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5>HMS</h5>
+                    <p class="mb-3">Quality healthcare at your fingertips. Book appointments with specialists and manage your healthcare journey seamlessly.</p>
+                    <div class="d-flex gap-3 mt-3 social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="/"><i class="fas fa-chevron-right me-1"></i> Home</a></li>
+                        <li class="mb-2"><a href="/services"><i class="fas fa-chevron-right me-1"></i> Services</a></li>
+                        <li class="mb-2"><a href="/about"><i class="fas fa-chevron-right me-1"></i> About Us</a></li>
+                        <li class="mb-2"><a href="/contact"><i class="fas fa-chevron-right me-1"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5>Contact Info</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Mumbai</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> (123) 456-7890</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> info@hms.com</li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5>Hours</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="far fa-clock me-2"></i> Monday - Friday: 8:00 AM - 8:00 PM</li>
+                        <li class="mb-2"><i class="far fa-clock me-2"></i> Saturday: 9:00 AM - 5:00 PM</li>
+                        <li class="mb-2"><i class="far fa-clock me-2"></i> Sunday: 10:00 AM - 2:00 PM</li>
+                        <li class="mb-2"><i class="fas fa-exclamation-circle me-2"></i> Emergency: 24/7</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4" style="border-color: rgba(255, 255, 255, 0.1);">
+            <div class="text-center">
+                <p class="mb-0">&copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}"></span> HMS. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js" defer></script>
+    
+    <!-- jQuery Validation -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js" defer></script>
+    
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous" defer></script>
+    
+    <!-- Custom JS -->
+    <script th:src="@{/js/user_script.js}" defer></script>
+    
+    <!-- Page-specific scripts if needed -->
+    <th:block th:if="${content == 'doctor/schedule'}">
+        <script th:src="@{/js/schedule.js}" defer></script>
+    </th:block>
+
+    <!-- Responsive Elements Helper Script -->
+    <script>
+        // Enhance mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Close navbar when clicking outside on mobile
+            document.addEventListener('click', function(event) {
+                const navbarCollapse = document.getElementById('navbarContent');
+                const navbarToggler = document.querySelector('.navbar-toggler');
+                
+                if (window.innerWidth < 992 && 
+                    navbarCollapse.classList.contains('show') &&
+                    !navbarCollapse.contains(event.target) &&
+                    !navbarToggler.contains(event.target)) {
+                    // Create a new bootstrap collapse instance and hide it
+                    const bsCollapse = new bootstrap.Collapse(navbarCollapse, {toggle: false});
+                    bsCollapse.hide();
+                }
+            });
+            
+            // Add smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

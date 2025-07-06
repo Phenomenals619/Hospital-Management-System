@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::body})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<section>
+		<div class="container p-2">
+			<div class="row">
+				<div class="col-md-10">
+					<div class="card paint-card">
+						<div class="card-header text-center fw-bold">Update Profile
+							Details</div>
+						<div class="card-body">
+							<form action="/doctor/updateProfile" method="post" enctype="multipart/form-data">
+								<div class="row">
+									<div class="col">
+										<label>Full Name</label> <input type="text"
+											th:value="${user.fullName}"
+											class="form-control form-control-sm" name="fullName" readonly>
+									</div>
+
+									<div class="col">
+										<label>Email</label> <input type="text"
+											th:value="${user.email}" readonly name="email"
+											class="form-control form-control-sm">
+									</div>
+
+									<div class="col">
+										<label>Mobile Number</label> <input type="text" readonly
+											th:value="${user.mobNo}" name="mobNo"
+											class="form-control form-control-sm">
+									</div>
+								</div>
+
+								<div class="row mt-3">
+									<div class="col">
+										<label>Account Status</label> <input type="text" readonly
+											class="form-control form-control-sm"
+											th:value="${user.enable}">
+									</div>
+
+									<div class="col">
+										<label>Specialist</label> <input type="text" name="specialist"
+											readonly th:value="${user.doctDtls.specialist}"
+											class="form-control form-control-sm">
+									</div>
+
+									<div class="col">
+										<label>Dieases</label> <input type="text" name="diseases"
+											readonly th:value="${user.doctDtls.diseases}"
+											class="form-control form-control-sm">
+									</div>
+								</div>
+
+								<div class="row mt-3">
+									<div class="col">
+										<label>Address</label> <input type="text" required
+											class="form-control form-control-sm" name="address"
+											th:value="${user.doctDtls.address}">
+									</div>
+
+									<div class="col">
+										<label>Dcotor Fee</label> <input type="text" required
+											name="doctorCharges"
+											th:value="${user.doctDtls.doctorCharges}"
+											class="form-control form-control-sm">
+									</div>
+									
+									<div class="col">
+									<label>Profile Image</label>
+									<input type="file" name="pf" class="form-control form-control-sm">
+									</div>
+
+
+								</div>
+
+
+								<div class="mt-3">
+									<label>Description</label>
+									<textarea rows="3" cols="" class="form-control" required
+										name="description">[[${user.doctDtls.description}]]</textarea>
+								</div>
+
+								<input type="hidden" name="id" th:value="${user.doctDtls.id}">
+
+								<button class="btn btn-success mt-2">Update</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<section>
+		<div class="container p-1">
+			<div class="row">
+				<div class="col-md-12 ">
+					<div class="card paint-card">
+						<div class="card-header text-center fs-4">
+							Doctor List
+							<th:block th:if="${session.msg}" class="text-center">
+								<p class="text-success fw-bold" th:text="${session.msg}"></p>
+								<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+							</th:block>
+
+						</div>
+						<div class="card-body">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">SL No</th>
+										<th scope="col">Full Name</th>
+										<th scope="col">Email</th>
+										<th scope="col">Phone Number</th>
+										<th scope="col">Certificate</th>
+										<th scope="col">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="d,num:${doct}">
+										<th scope="row">[[${num.count}]]</th>
+										<td>[[${d.fullName}]]</td>
+										<td>[[${d.email}]]</td>
+										<td>[[${d.mobNo}]]</td>
+										<td><a th:href="@{'/admin/download/'+${d.certificate}}"
+											class="text-decoration-none">[[${d.certificate}]]</a></td>
+										<td><a th:href="@{'/admin/getDoct/'+${d.id}}"
+											class="btn btn-primary btn-sm">Update</a></td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

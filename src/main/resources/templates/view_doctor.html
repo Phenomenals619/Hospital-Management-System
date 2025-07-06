@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::body})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container-fluid p-4">
+		<div class="row">
+			<div class="col-md-6 ">
+
+				<div class="card paint-card">
+					<div class="card-body">
+
+						<div class="row">
+							<div class="col-md-4 text-center">
+								<img th:src="@{'/doct_img/'+${did.profile}}" width="50%"
+									height="120px" class="mt-3">
+							</div>
+
+							<div class="col-md-8">
+
+								<span class="text-primary fs-3">[[${us.fullName}]]</span>
+
+								<p>
+									Email : [[${us.email}]] <br> Mob No: [[${us.mobNo}]]
+								</p>
+
+								<p>
+									Specialist : [[${did.specialist}]] <br> Address :
+									[[${did.address}]] <br> Doctor Fee : &#8377;
+									[[${did.doctorCharges}]] <br> Description :
+									[[${did.description}]]
+
+
+								</p>
+
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+			<div class="col-md-6 ">
+				<div class="card paint-card">
+
+					<div class="card-header text-center fw-bold">Appointment</div>
+					<div class="card-body">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Date</th>
+									<th scope="col">Time</th>
+									<th scope="col">Slot</th>
+									<th scope="col">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+
+								<tr th:each="a:${appoint}">
+									<th scope="row">[[${a.date}]]</th>
+									<td>[[${a.fromTime}]] - [[${a.toTime}]]</td>
+									<td>[[${a.slot}]]</td>
+									<td>
+									
+									<th:block th:if="${user==null}">
+											<a href="/signin" class="btn btn-sm btn-primary">Book</a>
+									</th:block>
+									
+									<th:block th:if="${user!=null}">
+											<a th:href="@{'/user/appointment/'+${us.id}+'/'+${a.id}}" class="btn btn-sm btn-primary">Book</a>
+									</th:block>
+										
+										
+										</td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+
+
+		</div>
+	</div>
+</body>
+</html>

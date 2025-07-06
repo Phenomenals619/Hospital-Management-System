@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<section>
+		<div class="container p-2">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					<div class="card paint-card">
+						<div class="card-header text-center fw-bold">Edit Specialist</div>
+
+						<div class="card-body">
+							<form>
+								<div class="mb-2">
+									<label>Title</label> <input type="text" name=""
+										class="form-control">
+								</div>
+								<div class="mb-2">
+									<label>Description</label>
+									<textarea rows="3" cols="" class="form-control"></textarea>
+								</div>
+								<button class="btn btn-success col-md-12">Update</button>
+							</form>
+						</div>
+
+					</div>
+				</div>
+
+			
+			</div>
+		</div>
+	</section>
+</body>
+</html>

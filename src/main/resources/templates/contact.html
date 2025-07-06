@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="base::layout(~{::body})"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - HMS</title>
+    <!-- Include your CSS and other head elements here -->
+  </head>
+  <body>
+    <!-- Main Content -->
+    <main id="main-content">
+      <div class="container py-5">
+        <h1 class="text-center mb-4">Contact Us</h1>
+        <div class="row">
+          <div class="col-lg-6 mx-auto text-center">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title mb-4">Connect With Us</h5>
+                <p class="card-text mb-4">
+                  Follow us on social media to stay updated with the latest news
+                  and updates.
+                </p>
+                <div class="social-links d-flex justify-content-center gap-3">
+                  <!-- Facebook -->
+                  <a
+                    href="https://www.facebook.com/yourpage"
+                    target="_blank"
+                    class="btn btn-primary btn-lg"
+                  >
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                  <!-- Twitter -->
+                  <a
+                    href="https://www.twitter.com/yourpage"
+                    target="_blank"
+                    class="btn btn-info btn-lg"
+                  >
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                  <!-- Instagram -->
+                  <a
+                    href="https://www.instagram.com/yourpage"
+                    target="_blank"
+                    class="btn btn-danger btn-lg"
+                  >
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                  <!-- LinkedIn -->
+                  <a
+                    href="https://www.linkedin.com/yourpage"
+                    target="_blank"
+                    class="btn btn-primary btn-lg"
+                  >
+                    <i class="fab fa-linkedin-in"></i>
+                  </a>
+                  <!-- YouTube -->
+                  <a
+                    href="https://www.youtube.com/yourpage"
+                    target="_blank"
+                    class="btn btn-danger btn-lg"
+                  >
+                    <i class="fab fa-youtube"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <style>
+      /* Base Styles */
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #0d6efd;
+        margin-bottom: 1.5rem;
+      }
+
+      .card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-body {
+        padding: 2rem;
+      }
+
+      .card-title {
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: #0d6efd;
+        margin-bottom: 1.5rem;
+      }
+
+      .card-text {
+        font-size: 1.1rem;
+        color: #555;
+        margin-bottom: 2rem;
+      }
+
+      .social-links .btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: rgb(59, 124, 162);
+      }
+
+      .social-links .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Specific Button Colors */
+      .btn-primary {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+      }
+
+      .btn-info {
+        background-color: #0dcaf0;
+        border-color: #0dcaf0;
+      }
+
+      .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+      }
+
+      .btn-primary:hover {
+        background-color: #0b5ed7;
+        border-color: #0b5ed7;
+      }
+
+      .btn-info:hover {
+        background-color: #0ba8d9;
+        border-color: #0ba8d9;
+      }
+
+      .btn-danger:hover {
+        background-color: #bb2d3b;
+        border-color: #bb2d3b;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 767.98px) {
+        h1 {
+          font-size: 2rem;
+        }
+
+        .card-title {
+          font-size: 1.5rem;
+        }
+
+        .card-text {
+          font-size: 1rem;
+        }
+
+        .social-links .btn {
+          width: 45px;
+          height: 45px;
+          font-size: 1.1rem;
+        }
+      }
+    </style>
+  </body>
+</html>

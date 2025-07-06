@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<section>
+		<div class="container p-2">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="card paint-card">
+						<div class="card-header text-center fw-bold">Add Appointment</div>
+						<th:block th:if="${session.succMsg}">
+							<p class="text-success fw-bold text-center" th:text="${session.succMsg}"></p>
+							<th:block th:text="${#session.removeAttribute('succMsg')}"></th:block>
+						</th:block>
+
+						<th:block th:if="${session.errorMsg}" >
+							<p class="text-danger fw-bold text-center" th:text="${session.errorMsg}"></p>
+							<th:block th:text="${#session.removeAttribute('errorMsg')}"></th:block>
+						</th:block>
+
+						<div class="card-body">
+							<form action="/doctor/registerApoint" method="post">
+								<div class="mb-2">
+									<label>Date</label> <input type="date" name="date"
+										class="form-control">
+								</div>
+
+								<div class="mb-2">
+									<label>From Time</label> <input type="time" name="fromTime"
+										class="form-control">
+								</div>
+
+								<div class="mb-2">
+									<label>To Time</label> <input type="time" name="toTime"
+										class="form-control">
+								</div>
+
+								<div class="mb-2">
+									<label>Slot</label> <input type="text" name="slot"
+										class="form-control">
+								</div>
+								<button class="btn btn-success col-md-12">Submit</button>
+							</form>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="col-md-9">
+					<div class="card paint-card">
+						<div class="card-header text-center fs-4">Appointment
+							Schedule List</div>
+						<div class="card-body">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">SL No</th>
+										<th scope="col">Date</th>
+										<th scope="col">Time</th>
+
+										<th scope="col">Slot</th>
+										<!-- <th scope="col">Action</th> -->
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="a,num:${appList}">
+										<th scope="row">[[${num.count}]]</th>
+										<td>[[${a.date}]]</td>
+										<td>[[${a.fromTime}]] - [[${a.toTime}]]</td>
+
+										<td>[[${a.slot}]]</td>
+										<!-- <td><a href="/admin/editSpec"
+											class="btn btn-primary btn-sm">Edit</a> <a href=""
+											class="btn btn-danger btn-sm">Delete</a></td> -->
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

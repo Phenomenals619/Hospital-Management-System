@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::body})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container-fluid p-4">
+		<div class="row">
+			<div class="col-md-6 ">
+
+				<div class="card paint-card">
+					<div class="card-body">
+						<div class="card-header fw-bold">
+							Apointment Date : [[${appoint.date}]]<br> Time :
+							[[${appoint.fromTime}]] - [[${appoint.toTime}]]
+						</div>
+						<div class="row">
+							<div class="col-md-4 text-center">
+								<img th:src="@{'/doct_img/'+${doctor.doctDtls.profile}}"
+									width="50%" height="120px" class="mt-3">
+							</div>
+
+							<div class="col-md-8">
+
+								<span class="text-primary fs-3">[[${doctor.fullName}]]</span>
+
+								<p>
+									Email : [[${doctor.email}]] <br> Mob No:
+									[[${doctor.mobNo}]]
+								</p>
+
+								<p>
+									Specialist : [[${doctor.doctDtls.specialist}]] <br>
+									Address : [[${doctor.doctDtls.address}]] <br> Doctor Fee :
+									&#8377; [[${doctor.doctDtls.doctorCharges}]] <br>
+									Description : [[${doctor.doctDtls.description}]]
+
+								</p>
+
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+			<div class="col-md-6">
+				<div class="card">
+					
+					<div class="card-header fw-bold">Patient Details
+						<th:block th:if="${session.errorMsg}" class="text-center">
+								<p class="text-danger fw-bold" th:text="${session.errorMsg}"></p>
+								<th:block th:text="${#session.removeAttribute('errorMsg')}"></th:block>
+							</th:block>
+					</div>
+					
+					<div class="card-body">
+						<form action="/user/cnfmAppoint" method="post">
+							<div class="mb-2">
+								<label>Full Name</label> <input type="text"
+									class="form-control form-control-sm" name="patientName"
+									th:value="${user.fullName}">
+							</div>
+
+							<div class="mb-2">
+								<label>Mobile Number</label> <input type="text" readonly
+									th:value="${user.mobNo}" class="form-control form-control-sm"
+									name="mobNo">
+							</div>
+
+							<div class="mb-2">
+								<label>Email</label> <input type="text" th:value="${user.email}"
+									class="form-control form-control-sm" name="email">
+							</div>
+
+							<input type="hidden" name="did" th:value="${doctor.id}">
+
+							<input type="hidden" name="uid" th:value="${user.id}"> <input
+								type="hidden" name="sid" th:value="${appoint.id}">
+
+
+							<button class="btn btn-sm btn-primary">Confirm</button>
+						</form>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>

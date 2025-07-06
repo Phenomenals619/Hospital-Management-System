@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::body})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<section>
+
+		<div class="container-fluid p-3" style="background-color: #f0f1f2;">
+			<div class="row">
+				<div class="col-md-8 offset-md-2">
+					<form action="search" method="post">
+						<div class="input-group">
+							<input type="text" class="form-control" name="ch"
+								placeholder="Search Specialist, Diseases">
+							<button class="btn bg-success ms-2 text-white">Search</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="container p-4">
+		
+		
+		<div class="row mt-2" th:each="di:${doctorList}">
+				<div class="col-md-10 offset-md-1">
+
+					<div class="card paint-card">
+						<div class="card-body">
+
+							<div class="row">
+								<div class="col-md-4 text-center">
+									<img th:src="@{'doct_img/'+${di.doctDtls.profile}}" width="45%"
+										height="100px" class="mt-3">
+								</div>
+
+								<div class="col-md-8">
+									<th:block>
+										<span class="text-primary fs-3">[[${di.fullName}]]</span>
+
+
+										<p>
+											Specialist : [[${di.doctDtls.specialist}]] <br> Address :
+											[[${di.doctDtls.address}]] <br> Doctor Fee : &#8377;
+											[[${di.doctDtls.doctorCharges}]]
+										</p>
+										<a th:href="@{'viewDoct/'+${di.id}+'/'+${di.doctDtls.id}}"
+											class="btn btn-success btn-sm col-md-6">Book Appointment</a>
+									</th:block>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			<div class="row mt-2" th:each="d:${doct}">
+				<div class="col-md-10 offset-md-1">
+
+					<div class="card paint-card">
+						<div class="card-body">
+
+							<div class="row">
+								<div class="col-md-4 text-center">
+									<img th:src="@{'doct_img/'+${d.profile}}" width="45%"
+										height="100px" class="mt-3">
+								</div>
+
+								<div class="col-md-8">
+									<th:block th:with="doc=${userService.getUserByDoctDtails(d)}">
+										<span class="text-primary fs-3">[[${doc.fullName}]]</span>
+
+
+										<p>
+											Specialist : [[${d.specialist}]] <br> Address :
+											[[${d.address}]] <br> Doctor Fee : &#8377;
+											[[${d.doctorCharges}]]
+										</p>
+										<a th:href="@{'viewDoct/'+${doc.id}+'/'+${d.id}}"
+											class="btn btn-success btn-sm col-md-6">Book Appointment</a>
+									</th:block>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+	</section>
+</body>
+</html>

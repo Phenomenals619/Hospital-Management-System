@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="base::layout(~{::section})"
+>
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Insert title here</title>
+  </head>
+  <body>
+    <section class="bgimg">
+      <div class="container p-2">
+        <h2 class="text-center">Hi , Doctor</h2>
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <div class="card paint-card">
+              <div class="card-body">
+                <div class="text-end">
+                  <a href="editProfile" class="btn btn-sm btn-primary">Edit</a>
+                </div>
+                <div class="text-center">
+                  <img
+                    th:src="@{'../doct_img/'+${user.doctDtls.profile}}"
+                    width="15%"
+                    height="100px"
+                  />
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-md-6 offset-md-3">
+                    <p>
+                      <span class="fw-bold">Doctor Name</span> :
+                      [[${user.fullName}]] <br />
+                      <span class="fw-bold">Specialist </span> :
+                      [[${user.doctDtls.specialist}]] <br />
+                      <span class="fw-bold">Email</span> : [[${user.email}]]
+                      <br />
+                      <span class="fw-bold">Mobile Number</span> :
+                      [[${user.mobNo}]] <br />
+
+                      <span class="fw-bold">Address</span> :
+                      [[${user.doctDtls.address}]] <br />
+
+                      <span class="fw-bold">Doctor Fee</span> :
+                      [[${user.doctDtls.doctorCharges}]] <br />
+
+                      <!-- <span
+											class="fw-bold">Description</span> : [[${user.doctDtls.description}]] <br> -->
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
